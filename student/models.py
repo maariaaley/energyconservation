@@ -1,5 +1,5 @@
 from django.db import models
-# Create your models here.
+#model for student
 class Student(models.Model):
     first_name = models.CharField(max_length=80, default='Maria')
     last_name = models.CharField(max_length=80, default='Aley')
