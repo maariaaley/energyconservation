@@ -13,16 +13,18 @@
     <title>Register as Student</title>
 </head>
 
+{% load crispy_forms_tags %} 
+
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Hello, Student <i class="fas fa-globe-americas"></i></h1>
+            <h1 class="display-6">Hello, Student <i class="fas fa-globe-americas"></i></h1>
             <p class="lead">In this form you can register you personal information</p>
         </div>
         <form method="post" action="">
           {% csrf_token %}
-          {{form}}            
-            <button type="submit" class="btn btn-secondary" name="butoncito"> Submit
+          {{form|crispy}}            
+            <button type="submit" class="btn btn-secondary"> Submit
             </button>
           </form>
     </div>
