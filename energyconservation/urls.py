@@ -18,10 +18,12 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 from users import views as user_views
+from room import views as room_views
 
 urlpatterns = [
     path('',user_views.home, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', user_views.signup, name= "signup"),
+    path('create/', room_views.create_room)
 ]

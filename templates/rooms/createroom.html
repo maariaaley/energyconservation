@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Register as Student</title>
+    <title>Create Room Profile</title>
 </head>
 
 {% load crispy_forms_tags %} 
@@ -18,8 +18,8 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-6">Hello, Student <i class="fas fa-globe-americas"></i></h1>
-            <p class="lead">In this form you can register you personal information</p>
+            <h1 class="display-6">Hello, User <i class="fas fa-globe-americas"></i></h1>
+            <p class="lead">In this form you can create the profile for a new room</p>
         </div>
         <form method="post" action="">
           {% csrf_token %}

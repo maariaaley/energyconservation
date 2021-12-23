@@ -1,15 +1,12 @@
 from django.db import models
-from landlord.models import Landlord
-
-from student.models import Student
+from users.models import Landlord
 # Model for room
 class Room(models.Model):
-    address = models.CharField(max_lenght=80)
+    address = models.CharField(default='12345678', max_length=30)
     room_number = models.IntegerField()
     square_meters = models.IntegerField()
     windows = models.IntegerField()
-    insulated = models.BooleanField(default=True)
-    bathroom = models.BooleanField(default=False)
-    student = models.OneToOneField(Student, on_delete=models.CASCADE, primary_key=True)
+    is_insulated = models.BooleanField(default=False)
+    is_normal = models.BooleanField(default=False)
+    has_bathroom = models.BooleanField(default=False)
     landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE)
-

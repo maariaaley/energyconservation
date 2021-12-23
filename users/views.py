@@ -4,13 +4,10 @@ from django.shortcuts import render
 from users.forms import UserForm
 from users.models import User
 from django.contrib.auth.hashers import make_password 
-
-# Create your views here.
-
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'users/home.html')
-
 
 def signup(request):
     if request.method == 'POST':
@@ -29,7 +26,7 @@ def signup(request):
                 is_student = is_student,
             )
             user.save()
-            return HttpResponseRedirect('/signup')
+            return HttpResponseRedirect('/accounts/login')
     else:
         user_form = UserForm()
         return render(request, 'users/signup.html', {'form': user_form})
