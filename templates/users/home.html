@@ -1,19 +1,28 @@
-
-<html>
-    <head>
-      <style>
-       body {
-        color: pink;
-        text-align: center;
-        } 
-   
-      </style>
-    </head>
-    <body>
-      <h1>Hello</h1>
-  
-      <p> Welcome to the Our site</p>
-      <div>
+{% load static %}
+{% load crispy_forms_tags %} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>Home</title>
+</head>
+<body>
+  <div class="container">
+      <div class="jumbotron">
+          <h1 class="display-6">Welcome to Energy Conservation<i class="fas fa-globe-americas"></i></h1>
+          <p class="lead">Login or register as an user</p>
       </div>
-    </body>
-  </html>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a class="btn btn-secondary btn-lg btn-block" href="accounts/login" role="button">Login</a>
+        <a class="btn btn-info btn-lg btn-block" href="signup" role="button">Register</a>
+      </form>
+    </div>
+  </body> 
+</html>
