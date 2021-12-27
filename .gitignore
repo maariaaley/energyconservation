@@ -1,7 +1,10 @@
 .idea
 .DS_Store
 .vscode
-**/__pycache__
+*.pyc
+*/*/*/__pycache__/
+*/*/__pycache__/
+*/__pycache__/
 *.py[cod]
 
 # C extensions
