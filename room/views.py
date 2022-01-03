@@ -1,7 +1,12 @@
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-def create_room(request):\
+
+@login_required
+def home(request):
+    return render(request, 'users/home.html')
+
+def create_room(request):
 
     return render(request, 'users/home.html')

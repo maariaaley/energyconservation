@@ -1,5 +1,4 @@
 from django import forms
-from room import Room
 
 class CreateRoomForm(forms.Form):
     address = forms.CharField(label='Address', max_length=80)

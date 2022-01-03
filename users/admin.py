@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import UserForm
-from .models import User
+from .forms import RegisterForm
+from .models import User, Profile
 
-class CustomUserAdmin(UserAdmin):
-    add_form = UserForm
+#class CustomUserAdmin(UserAdmin):
+#    add_form = UserForm
 
-admin.site.register(User, CustomUserAdmin)
+admin.site.register(User)
+admin.site.register(Profile)

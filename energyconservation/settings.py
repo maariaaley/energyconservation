@@ -43,6 +43,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'appliances',
     'users',
     'room',
     'django.contrib.admin',
@@ -89,7 +90,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'energyconservation.wsgi.application'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/signup'
+LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_URL = '/login/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -97,7 +103,7 @@ LOGIN_REDIRECT_URL = '/signup'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'energyconservation', 
+        'NAME': 'energyconservation2', 
         'USER': 'majo', 
         'PASSWORD': 'majo123',
         'HOST': '127.0.0.1', 
