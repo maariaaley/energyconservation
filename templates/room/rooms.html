@@ -12,7 +12,7 @@
   <div class="d-flex flex-row">
     {% if cuartos != None %}
     {% for room in cuartos %}
-    <div class="card" style="width: 18rem">
+    <div class="card col-md-4" style="">
       <div class="card-body">
         <h5 class="card-title">Room Number: {{room.room_number}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">
@@ -20,17 +20,11 @@
         </h6>
         <p class="card-text">Address: {{room.address}}</p>
         <a href="{% url 'edit_room' room.room_number %}" class="card-link">Modifiy Room</a>
-         
+        <a href="{% url 'register_consumption' room.room_number %}" class="card-link">Add Comsuption</a>
       </div>
     </div>
     {% endfor %}
     {% endif %}  
-
-    {% if cuartos %}
-      <div>
-        <h1>You do not have created a room yet</h1>
-      </div>
-    {% endif %}
   </div>
 </div>
 {% endblock %}

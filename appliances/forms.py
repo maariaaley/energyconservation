@@ -1,6 +1,8 @@
+from django.db.models.fields import DateTimeField
 from django.forms.models import construct_instance
 from .models import *
 from django import forms
+from bootstrap_datepicker_plus.widgets import DatePickerInput, TimePickerInput
 
 label_choices = (
     ("1", "A"),
@@ -35,20 +37,16 @@ class ApplianceForm(forms.Form):
 
 
 
-class CreateActionForm(forms.ModelForm):
-    summary = forms.CharField(label='Summary', max_length=30)
-    action = forms.CharField(label='Action Description', max_length=50)
-    #appliance = forms.ChoiceField(label='Appliance', widget=forms.Select())
-    #type_action = forms.ChoiceField(label='Type of Action', widget=forms.Select())
+class CreateActionForm(forms.Form):
+    appliance = forms.ChoiceField(label='Appliance', widget=forms.Select())
+    date = forms.DateField(label='Date', widget=DatePickerInput())
+    type_action = forms.ChoiceField(label='Type of Action', widget=forms.Select())
     
-    def __init__(self,*args, **kwargs):
-        super().__init__(*args, **kwargs)
-        #self.fields['appliance'].choices = appliances_options
-        #self.fields['type_action'].choices = actions_options
+    def __init__(self,appliances_options, actions_options,*args, **kwargs):
+        super().__init__(*args,  **kwargs)
+        self.fields['appliance'].choices = appliances_options
+        self.fields['type_action'].choices = actions_options
     
-    
-    class Meta:
-        model = Actions
-        exclude = []
+
     
     

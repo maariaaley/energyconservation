@@ -7,13 +7,12 @@
         <h2>Register Action</h2>
         <br>
         <br>
-        <form method="POST" action="{% url 'create_action' room_number %}"> 
+        <form class="col-md-4" method="POST" action="{% url 'create_action' room_number appliance_id %}"> 
             {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
+            {{ field.label_tag }} {{ field }}
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit" class="btn btn-secondary"> Create!!
-            </button>
+            <button type="submit" class="btn btn-secondary"> Create!!</button>
         </form>
 
     </div>

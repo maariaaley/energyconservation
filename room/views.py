@@ -1,9 +1,10 @@
+from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
 
 from users.models import Landlord, Student
 from appliances.models import *
-from .models import Room
-from .forms import CreateRoomForm, UpdateRoomForm
+from .models import Consumption, Room
+from .forms import CreateRoomForm, UpdateRoomForm, RegisterConsumptionForm
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -61,4 +62,22 @@ def edit(request, id):
         form = UpdateRoomForm(instance=Room.objects.get(room_number=id))
         return render(request, 'room/editroom.html', {'form': form })
 
-
+@login_required
+def register_consumption(request, room_number):
+    if request.method == "POST":
+        form = RegisterConsumptionForm(request.POST)
+        if form.is_valid():
+            consumption = Consumption(
+                room_number=Room.objects.get(room_number=room_number),
+                electricity=form.cleaned_data['electricity'],
+                gas=form.cleaned_data['gas'],
+                water=form.cleaned_data['water'],
+                date=form.cleaned_data['date']
+            )
+            consumption.save()
+            return HttpResponseRedirect('/room/home')
+        else:
+            return render(request, 'room/register_consumption.html', {'form': form , 'room_number':room_number})
+    else:
+        form = RegisterConsumptionForm()
+        return render(request, 'room/register_consumption.html', {'form': form , 'room_number':room_number})

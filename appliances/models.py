@@ -58,8 +58,6 @@ class Action_Appliance(models.Model):
     type = ManyToManyField(Type)
     
 class Actions(models.Model):
-    summary = models.CharField(max_length=30, null=True)
-    action = models.CharField(max_length=50, null=True)
     date = models.DateField(null=True)
     appliance = models.ForeignKey(Appliances, on_delete=models.CASCADE)
     action_appliance = models.ForeignKey(Action_Appliance, on_delete=models.CASCADE)

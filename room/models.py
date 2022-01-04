@@ -17,3 +17,4 @@ class Consumption(models.Model):
     electricity = models.IntegerField()
     gas = models.IntegerField()
     water = models.IntegerField()
+    date = models.DateField()

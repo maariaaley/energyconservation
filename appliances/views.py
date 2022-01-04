@@ -39,18 +39,27 @@ def create(request, room_number):
 
 
 @login_required
-def create_action(request, room_number):
+def create_action(request, room_number, appliance_id=None):
+    actions = Action_Appliance.objects.all().values_list('type', 'name')
+    #return HttpResponse(appliances.values_list('id','appliance_name'))
+    appliance = Appliances.objects.all().filter(id = appliance_id)
+    actions_options = Action_Appliance.objects.all().filter(type=Type.objects.get(id=appliance[0].type.id)).values_list('id','name')
     if request.method == "POST":
-        form = CreateActionForm(request.POST)
+        form = CreateActionForm(appliance.values_list('id', 'appliance_name'), actions_options, request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(request, 'room/home')
+            action = Actions(
+                appliance= Appliances.objects.get(id=form.cleaned_data['appliance']),
+                date = form.cleaned_data['date'],
+                action_appliance = Action_Appliance.objects.get(id = form.cleaned_data['type_action'])
+            )
+            action.save()
+            return HttpResponseRedirect('/room/home')
     else:
-        appliances_options = Appliances.objects.all().filter(room = Room.objects.get(room_number=room_number))
-        actions = Action_Appliance.objects.all().values_list('type', 'name')
-        #return HttpResponse(appliances.values_list('id','appliance_name'))
-        form = CreateActionForm()
-        return render(request, 'appliances/createaction.html', {'form': form, 'room_number': room_number } )
+
+        form = CreateActionForm(appliance.values_list('id', 'appliance_name'), actions_options)
+        
+        
+        return render(request, 'appliances/createaction.html', {'form': form, 'room_number': room_number, 'appliance_id':appliance_id } )
     
 
 def edit(request, room_number, appliance_id):

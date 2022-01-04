@@ -1,5 +1,10 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{{ form.media }}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,6 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+        
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         <title>{% block title %}{{username}} - Home  {% endblock %}</title>
     </head>
