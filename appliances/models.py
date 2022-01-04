@@ -1,6 +1,8 @@
 from django.db import models
+from django.db.models.base import Model
 from django.db.models.fields import CharField, IntegerField
-from django.db.models.fields.related import OneToOneField
+from django.db.models.fields.related import ManyToManyField, OneToOneField
+from django.db.models.fields.reverse_related import ManyToOneRel
 from room.models import Room
 
 label_choices = (
@@ -25,16 +27,39 @@ appliance_choice = (
     ("10", "Smartphone charger"),
 )
 
+action_choice = (
+    ("1", "LCD TV"),
+    ("2", "Computer"),
+    ("3", "Laptop"),
+    ("4", "Lamp"),
+    ("5", "Electric heater"),
+    ("6", "Air conditioner"),
+    ("7", "Mini-fridge"),
+    ("8", "Fan"),
+    ("9", "Extension cord"),
+    ("10", "Smartphone charger"),
+)
+
 
 class Type(models.Model):
-    type = models.CharField(max_length=20, choices=appliance_choice)
+    type = models.CharField(max_length=20)
         
-class Actions(models.Model):
-    type = models.OneToOneField(Type, on_delete=models.CASCADE)
-
 class Appliances(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     appliance_name = models.CharField(max_length=20)
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
     label_class = models.CharField(max_length=1, choices=label_choices)
     energycomsuption = models.IntegerField() 
+
+
+
+class Action_Appliance(models.Model):
+    name = models.CharField(max_length=150)
+    type = ManyToManyField(Type)
+    
+class Actions(models.Model):
+    summary = models.CharField(max_length=30, null=True)
+    action = models.CharField(max_length=50, null=True)
+    date = models.DateField(null=True)
+    appliance = models.ForeignKey(Appliances, on_delete=models.CASCADE)
+    action_appliance = models.ForeignKey(Action_Appliance, on_delete=models.CASCADE)

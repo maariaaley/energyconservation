@@ -8,6 +8,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from appliances.forms import CreateActionForm
 
 # Create your views here.
 
@@ -18,12 +19,15 @@ def home(request):
     if user.check_is_landlord():
         landlord = Landlord.objects.get(user_id = user.id)
         cuartos = Room.objects.all().filter(landlord_id = landlord.user_id)
-        return render(request, 'rooms/rooms.html', {'cuartos': list(cuartos)})
+        return render(request, 'room/rooms.html', {'cuartos': list(cuartos)})
     elif user.check_is_student():
         student = Student.objects.get(user_id = user.id)
         room = Room.objects.all().filter(student = student).first()
-        appliances = Appliances.objects.all().filter(room = room)
-        return render(request, 'rooms/roomstudent.html', {'room': room, 'appliances': list(appliances)})
+        appliances = Appliances.objects.all().filter(room = room)[0:5]
+        actions = Actions.objects.all().filter(appliance_id__in=appliances.values_list('id'))[0:5]
+        if actions == None:
+            actions = list()
+        return render(request, 'room/roomstudent.html', {'room': room, 'appliances': list(appliances), 'actions': list(actions)})
     else:
         return HttpResponse(200, user.check_is_student())
         
@@ -39,10 +43,10 @@ def create(request):
             form.save()
             return HttpResponseRedirect('/room/home')
         else:
-            return render(request, 'rooms/createroom.html', {'form': form })
+            return render(request, 'room/createroom.html', {'form': form })
     else:
         form = CreateRoomForm()
-        return render(request, 'rooms/createroom.html', {'form': form })
+        return render(request, 'room/createroom.html', {'form': form })
     
 @login_required
 def edit(request, id):
@@ -52,7 +56,9 @@ def edit(request, id):
             form.save()
             return HttpResponseRedirect('/room/home')
         else:
-            return render(request, 'rooms/editroom.html', {'form': form })
+            return render(request, 'room/editroom.html', {'form': form })
     else:
         form = UpdateRoomForm(instance=Room.objects.get(room_number=id))
-        return render(request, 'rooms/editroom.html', {'form': form })
+        return render(request, 'room/editroom.html', {'form': form })
+
+

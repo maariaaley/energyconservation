@@ -55,3 +55,4 @@ class UpdateRoomForm(forms.ModelForm):
         model = Room
         fields = ['address', 'square_meters', 'windows', 'is_insulated', 'has_bathroom']
 
+

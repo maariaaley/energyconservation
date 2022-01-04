@@ -20,7 +20,7 @@ class User(AbstractUser):
     is_student = models.BooleanField(default=False)
     
     def check_is_landlord(self):
-        if(self.is_landlord):
+        if self.is_landlord:
             return True
         return False
     def check_is_student(self):

@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import Group
+from .models import *
 
 
 def initial(request):
@@ -35,9 +36,17 @@ def signup(request):
             if is_landlord == True:
                 group = Group.objects.get(name='landlord')
                 user.groups.add(group)
+                landlord = Landlord(
+                    user_id = user.id
+                )
+                landlord.save()
             if is_student == True:
                 group = Group.objects.get(name='student')
                 user.groups.add(group)
+                student = Student(
+                    user_id = user.id
+                )
+                student.save()
         return HttpResponseRedirect('/login')
     else:
         user_form = RegisterForm()

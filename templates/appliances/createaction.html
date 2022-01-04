@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block pagecontent %}
+    <div class="container">
+        <h2>Register Action</h2>
+        <br>
+        <br>
+        <form method="POST" action="{% url 'create_action' room_number %}"> 
+            {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-secondary"> Create!!
+            </button>
+        </form>
+
+    </div>
+{% endblock %}

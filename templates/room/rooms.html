@@ -10,6 +10,7 @@
         <a class="col-md-12 btn btn-dark"  href="{% url 'create_room' %}" role="button">Create Room</a>
     </div>
   <div class="d-flex flex-row">
+    {% if cuartos != None %}
     {% for room in cuartos %}
     <div class="card" style="width: 18rem">
       <div class="card-body">
@@ -23,6 +24,13 @@
       </div>
     </div>
     {% endfor %}
+    {% endif %}  
+
+    {% if cuartos %}
+      <div>
+        <h1>You do not have created a room yet</h1>
+      </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

@@ -52,8 +52,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap_datepicker_plus',
     'crispy_forms',
-     'django.contrib.sites',
+    'django.contrib.sites',
 ]
 SITE_ID = 1
 
@@ -90,7 +91,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'energyconservation.wsgi.application'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_REDIRECT_URL = '/room/home'
 LOGIN_URL = '/login/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

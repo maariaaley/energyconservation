@@ -29,7 +29,7 @@ from appliances import views as appliances_views
 
 urlpatterns = [
     path('',user_views.initial, name='initial'),
-    path('home/',room_views.home, name='home'),
+    #path('home/',room_views.home, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', user_views.signup, name= "signup"),
@@ -37,7 +37,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('profile/', user_views.profile),
     path('password-change/', ChangePasswordView.as_view(), name='password_change'),
-    path('room/home', room_views.home, name='room'),
+    path('room/home', room_views.home, name='home'),
     path('room/create/', room_views.create, name='create_room'),
     path('room/edit/<id>', room_views.edit, name='edit_room'),
     path('appliance/home', appliances_views.home, name='appliance'),
@@ -45,4 +45,6 @@ urlpatterns = [
     path('appliance/create/<room_number>', appliances_views.create, name='create_appliance'),
     #path('appliance/create/', appliances_views.createAppl, name='create_appliance_post'),
     path('appliance/edit/<id>', appliances_views.edit, name='edit_appliance'),
+    
+    path('appliance/create/action/<room_number>', appliances_views.create_action, name='create_action'),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
