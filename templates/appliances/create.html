@@ -4,10 +4,10 @@
 
 {% block pagecontent %}
     <div class="container">
-        <h2>Create new Room</h2>
+        <h2>Create new Appliance</h2>
         <br>
         <br>
-        <form method="post" action=""> 
+        <form method="POST" action="{% url 'create_appliance' room_number %}"> 
             {{ field.errors }}
         {{ field.label_tag }} {{ field }}
             {% csrf_token %}
@@ -18,9 +18,3 @@
 
     </div>
 {% endblock %}
-
-
-
-
-
-

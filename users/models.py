@@ -22,8 +22,11 @@ class User(AbstractUser):
     def check_is_landlord(self):
         if(self.is_landlord):
             return True
-        else:
-            return False
+        return False
+    def check_is_student(self):
+        if Student.objects.get(user_id=self.id) != None:
+            return True
+        return False
         
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

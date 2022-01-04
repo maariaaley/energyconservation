@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %} {% block title %} Room of
+{{request.user.username}} {% endblock %} {% block pagecontent %}
+<div class="row mt-5">
+  <div class="col-md-5">
+    <label class="small mb-1">Address:</label>
+    <p>{{room.address}}</p>
+
+    <label class="small mb-1">Occupant</label>
+    <p>{{request.user.first_name}} {{request.user.last_name}}</p>
+
+    <label class="small mb-1">Square Meters</label>
+    <p>{{room.square_meters}}</p>
+
+    <label class="small mb-1">Windows</label>
+    <p>{{room.windows}}</p>
+  </div>
+
+  <div class="col-md-5 float-right">
+    <h3>Appliances</h3>
+
+    {% for appliance in appliances %}
+    <div class="card rounded">
+      <div class="card-title text-center">
+        <h4>{{appliance.appliance_name}}</h4>
+      </div>
+      <div class="card-body">
+        <h5>Type: {{appliance.type.get_type_display}}</h5>
+        <h5>Class: {{appliance.get_label_class_display}}</h5>
+      </div>
+    </div>
+    {% endfor %}
+    <a class="btn btn-primary float-right" href="{% url 'create_appliance' room.room_number %}">Add Appliance</a>
+  </div>
+</div>
+{% endblock %}

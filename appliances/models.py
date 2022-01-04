@@ -24,15 +24,17 @@ appliance_choice = (
     ("9", "Extension cord"),
     ("10", "Smartphone charger"),
 )
+
+
 class Type(models.Model):
     type = models.CharField(max_length=20, choices=appliance_choice)
-# Create your models here.
-class Appliances(models.Model):
-    room_number = models.ForeignKey(Room, on_delete=models.CASCADE)
-    appliance_name = models.CharField(max_length=20)
-    type = models.OneToOneField(Type, on_delete=models.CASCADE)
-    label_class = models.CharField(max_length=1, choices=label_choices)
-    energycomsuption = models.IntegerField() 
-    
+        
 class Actions(models.Model):
     type = models.OneToOneField(Type, on_delete=models.CASCADE)
+
+class Appliances(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    appliance_name = models.CharField(max_length=20)
+    type = models.ForeignKey(Type, on_delete=models.CASCADE)
+    label_class = models.CharField(max_length=1, choices=label_choices)
+    energycomsuption = models.IntegerField() 
