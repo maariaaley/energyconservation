@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'appliances',
     'users',
     'room',
+    'reports',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'crispy_forms',
     'django.contrib.sites',
+    'slick_reporting'
 ]
 SITE_ID = 1
 
@@ -105,11 +107,11 @@ MEDIA_URL = '/media/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'energyconservation2', 
-        'USER': 'majo', 
-        'PASSWORD': 'majo123',
+        'NAME': 'energyconservation', 
+        'USER': 'postgres', 
+        'PASSWORD': 'Discovery.01',
         'HOST': '127.0.0.1', 
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 

@@ -55,10 +55,7 @@ def create_action(request, room_number, appliance_id=None):
             action.save()
             return HttpResponseRedirect('/room/home')
     else:
-
-        form = CreateActionForm(appliance.values_list('id', 'appliance_name'), actions_options)
-        
-        
+        form = CreateActionForm(appliance.values_list('id', 'appliance_name'), actions_options)        
         return render(request, 'appliances/createaction.html', {'form': form, 'room_number': room_number, 'appliance_id':appliance_id } )
     
 

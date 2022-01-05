@@ -4,6 +4,8 @@ from django.db.models.fields import CharField, IntegerField
 from django.db.models.fields.related import ManyToManyField, OneToOneField
 from django.db.models.fields.reverse_related import ManyToOneRel
 from room.models import Room
+from datetime import datetime, time
+from django.utils import timezone
 
 label_choices = (
     ("1", "A"),
@@ -43,6 +45,9 @@ action_choice = (
 
 class Type(models.Model):
     type = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.type
         
 class Appliances(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -50,14 +55,20 @@ class Appliances(models.Model):
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
     label_class = models.CharField(max_length=1, choices=label_choices)
     energycomsuption = models.IntegerField() 
+    date = models.DateField(default=timezone.now())
 
+    def __str__(self):
+        return self.appliance_name
 
 
 class Action_Appliance(models.Model):
     name = models.CharField(max_length=150)
     type = ManyToManyField(Type)
+
+    def __str__(self):
+        return self.name
     
 class Actions(models.Model):
-    date = models.DateField(null=True)
+    date = models.DateField(default=timezone.now())
     appliance = models.ForeignKey(Appliances, on_delete=models.CASCADE)
     action_appliance = models.ForeignKey(Action_Appliance, on_delete=models.CASCADE)
