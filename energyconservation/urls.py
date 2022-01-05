@@ -26,6 +26,7 @@ from django.urls import path
 from users import views as user_views
 from room import views as room_views
 from appliances import views as appliances_views
+from reports import views as report_views
 
 urlpatterns = [
     path('',user_views.initial, name='initial'),
@@ -45,6 +46,12 @@ urlpatterns = [
     path('appliance/create/<room_number>', appliances_views.create, name='create_appliance'),
     #path('appliance/create/', appliances_views.createAppl, name='create_appliance_post'),
     path('appliance/edit/<id>', appliances_views.edit, name='edit_appliance'),
-    
     path('appliance/create/action/<room_number>/<appliance_id>', appliances_views.create_action, name='create_action'),
+    
+    
+    #Reports
+    path('reports/', report_views.main, name='reports'),
+    path('reports/listreport/', report_views.ListReport.as_view(), name='list_report'),
+    path('reports/totalcomsuption/', report_views.TotalOfConsumption.as_view(), name='total_consumption'),
+    path('reports/landlordreport/', report_views.LandlordReports.as_view(), name='landlord_report') 
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

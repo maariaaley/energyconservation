@@ -40,8 +40,18 @@ def create(request):
         form = CreateRoomForm(request.POST)
         if form.is_valid():
             landlord = Landlord.objects.get(user_id = request.user.id)
-            form.landlord = landlord
-            form.save()
+            student = Student.objects.get(user_id = form.cleaned_data['student'])
+            room = Room(
+                room_number = form.cleaned_data['room_number'],
+                address = form.cleaned_data['address'],
+                square_meters = form.cleaned_data['square_meters'],
+                windows = form.cleaned_data['windows'],
+                is_insulated = form.cleaned_data['is_insulated'],
+                has_bathroom = form.cleaned_data['has_bathroom'],
+                landlord = landlord,
+                student = student
+            )
+            room.save()
             return HttpResponseRedirect('/room/home')
         else:
             return render(request, 'room/createroom.html', {'form': form })

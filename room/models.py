@@ -1,5 +1,9 @@
 from django.db import models
+from django.db.models.fields import DecimalField
+from django.forms.widgets import DateInput
 from users.models import Landlord, Student
+from datetime import date, datetime, time
+from django.utils import timezone
 
 # Model for room
 class Room(models.Model):
@@ -11,10 +15,14 @@ class Room(models.Model):
     has_bathroom = models.BooleanField(default=False, null=True)
     landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now())
+
+    def __str__(self):
+        return "Room: " + str(self.room_number)
     
 class Consumption(models.Model):
     room_number = models.ForeignKey(Room, on_delete=models.CASCADE)
     electricity = models.IntegerField()
     gas = models.IntegerField()
     water = models.IntegerField()
-    date = models.DateField()
+    date = models.DateField(default=timezone.now())

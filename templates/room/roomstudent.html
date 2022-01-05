@@ -31,7 +31,13 @@
       <a class="btn btn-secondary float-right" href="{% url 'create_action' room.room_number appliance.id %}">Add Action</a>
     </div>
     {% endfor %}
+    {% if room != None %}
     <a class="btn btn-primary float-right" href="{% url 'create_appliance' room.room_number %}">Add Appliance</a>
+    {% else %}
+    <div>
+      <h5>You have not been assigned to a room yet</h5>
+    </div>
+    {% endif %}
   </div>
 
   <div class="col-md-4 float-right">

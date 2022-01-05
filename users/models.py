@@ -18,18 +18,25 @@ class User(AbstractUser):
     phone_number = models.CharField(default='12345678', max_length=30)
     is_landlord = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
-    
+        
     def check_is_landlord(self):
         if self.is_landlord:
             return True
         return False
     def check_is_student(self):
-        if Student.objects.get(user_id=self.id) != None:
+        if self.is_student:
             return True
         return False
+
+    def __str__(self):
+        return self.first_name + self.last_name
         
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    
+    def __str__(self):
+        return self.user.first_name +" "+ self.user.last_name
+    
     
 class Landlord(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

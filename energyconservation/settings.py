@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'appliances',
     'users',
     'room',
+    'reports',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'crispy_forms',
     'django.contrib.sites',
+    'slick_reporting'
 ]
 SITE_ID = 1
 
@@ -156,3 +158,20 @@ STATICFILES_DIRS = ['static']
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SLICK_REPORTING_FORM_MEDIA = {
+'css': {
+    'all': (
+        'https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css',
+    )
+},
+'js': (
+    'https://code.jquery.com/jquery-3.3.1.slim.min.js',
+    'https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js',
+    'https://code.highcharts.com/highcharts.js',
+    )
+}

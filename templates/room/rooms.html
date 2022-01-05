@@ -9,7 +9,7 @@
     <div>
         <a class="col-md-12 btn btn-dark"  href="{% url 'create_room' %}" role="button">Create Room</a>
     </div>
-  <div class="d-flex flex-row">
+  <div class="d-flex flex-row flex-wrap">
     {% if cuartos != None %}
     {% for room in cuartos %}
     <div class="card col-md-4" style="">
